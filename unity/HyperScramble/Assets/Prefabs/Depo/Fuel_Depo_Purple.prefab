@@ -527,7 +527,7 @@ GameObject:
   - component: {fileID: 2986643990657106692}
   - component: {fileID: 8584218009772024795}
   - component: {fileID: 8373914097574939029}
-  - component: {fileID: 2009155622358212097}
+  - component: {fileID: 3392798481296146163}
   m_Layer: 0
   m_Name: Fuel_Depo_Purple
   m_TagString: Untagged
@@ -608,7 +608,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8, y: 2, z: 1.8}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2009155622358212097
+--- !u!114 &3392798481296146163
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -617,10 +617,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3103569168711958494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2412f150fc499038b8ecdfcdf74aa4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fef7bd606d5e2456a72eeb9e73faeeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 2735721571117174418, guid: a7f40bac5454247ec98f09637d383719, type: 3}
+  fXSoundType: 4
+  scoreType: 4
+  fuelAmount: 10
 --- !u!1 &4907753774548859196
 GameObject:
   m_ObjectHideFlags: 0

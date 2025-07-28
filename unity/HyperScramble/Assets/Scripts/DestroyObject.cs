@@ -3,6 +3,10 @@ using UnityEngine;
 public class DestroyObject : MonoBehaviour
 {
     [SerializeField] ParticleSystem explosionPrefab;
+    [SerializeField] FXSoundType fXSoundType = FXSoundType.None;
+    [SerializeField] public ScoreType scoreType = ScoreType.None;
+
+    const float destroyDelay = 2f;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -11,6 +15,18 @@ public class DestroyObject : MonoBehaviour
 
     protected void DestroyWithExplosion()
     {
+        // Play sound effect if specified
+        if (fXSoundType != FXSoundType.None)
+        {
+            SoundManager.Instance.PlaySound(fXSoundType);
+        }
+
+        // Add score if specified
+        if (scoreType != ScoreType.None)
+        {
+            ScoreManager.Instance.AddScore(scoreType);
+        }
+
         // Instantiate the explosion effect at the ship's position and rotation
         if (explosionPrefab != null)
         {
@@ -18,7 +34,7 @@ public class DestroyObject : MonoBehaviour
             ParticleSystem ps = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             ps.Play();
             // Destroy the explosion effect after it finishes playing
-            Destroy(ps.gameObject, 2f);
+            Destroy(ps.gameObject, destroyDelay);
         }
 
         // Destroy the ship GameObject

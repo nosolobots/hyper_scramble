@@ -7,6 +7,6 @@ public class DestroyBomb : DestroyObject
     {
         base.DestroyWithExplosion();
 
-        GameManager.Instance.ReloadBomb();
+        WeaponsManager.Instance.ReloadBomb();
     }
 }

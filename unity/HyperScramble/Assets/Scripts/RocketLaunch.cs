@@ -8,10 +8,12 @@ public class RocketLaunch : MonoBehaviour
     [SerializeField] float launchForce = 10f;
     [SerializeField] float launchProb = 0.5f;
     [SerializeField] float checkDelay = 0.2f;
+    [SerializeField] float autoDestroy = 5f;
 
     ParticleSystem rocketTrailPrefab;
     Rigidbody rb;
     bool isLaunched = false;
+    public bool IsLaunched => isLaunched;
 
     void Start()
     {
@@ -60,7 +62,13 @@ public class RocketLaunch : MonoBehaviour
             rb.angularVelocity = new Vector3(0, 0, angularVelocity);
         }
 
+        // Change the rocket score type
+        if (TryGetComponent<DestroyObject>(out var destroyObject))
+        {
+            destroyObject.scoreType = ScoreType.RocketLaunched;
+        }
+
         // Optionally, you can destroy the rocket after a certain time
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, autoDestroy);
     }
 }

@@ -1,54 +1,50 @@
+using Unity.Cinemachine;
 using UnityEngine;
+
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] int initialFuel = 100;
-    [SerializeField] int maxBombs = 2;
+    [Header("Game Settings")]
+    [SerializeField] int maxLives = 3;
+    [SerializeField] int extraLivesThreshold = 10000;
 
-    int _score;
-    public int Score => _score;
+    [Header("Ship Settings")]
+    [SerializeField] Vector3 startPosition = new Vector3(-32, 16, 0);
+    [SerializeField] GameObject shipPrefab;
 
-    int _fuel;
-    public int Fuel => _fuel;
+    [Header("Cinemachine Settings")]
+    [SerializeField] CinemachineCamera cinemachineCamera;
 
-    int _bombsLeft;
-    public int BombsLeft => _bombsLeft;
+    GameObject _playerShip;
 
-    protected override void Awake()
+    void Start()
     {
-        base.Awake();
-
-        _bombsLeft = maxBombs;
+        InitializeGame();
     }
 
-    public void AddScore(int points)
+    void InitializeGame()
     {
-        _score += points;
+        // Initialize game state, spawn ship, etc.
+        _playerShip = SpawnShip();
+
+        // Set up the Cinemachine camera to follow the player ship
+        Transform target = _playerShip.transform.Find("CamTarget").gameObject.transform;
+        cinemachineCamera.Follow = target;
+        cinemachineCamera.LookAt = target;
+
     }
 
-    public void AddFuel(int fuel)
+    GameObject SpawnShip()
     {
-        _fuel += fuel;
+        GameObject obj = Instantiate(shipPrefab, startPosition,
+            Quaternion.Euler(0, 180f, 0));
+
+        return obj;
     }
 
-    public void UseFuel(int fuel)
+    void Update()
     {
-        _fuel -= fuel;
-        if (_fuel < 0) _fuel = 0;
-    }
 
-    public void DropBomb()
-    {
-        if (_bombsLeft > 0)
-        {
-            _bombsLeft--;
-        }
     }
+    
 
-    public void ReloadBomb()
-    {
-        if (_bombsLeft < maxBombs)
-        {
-            _bombsLeft++;
-        }
-    }
 }

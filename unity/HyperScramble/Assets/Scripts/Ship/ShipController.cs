@@ -9,16 +9,6 @@ public class ShipController : MonoBehaviour
     [SerializeField] float maxVSpeed;
     [SerializeField] float maxYPosition = 40f;
 
-    [Header("Bomb Settings")]
-    [SerializeField] GameObject bombPrefab;
-    [SerializeField] float bombLaunchForce = 10f;
-    [SerializeField] float bombLaunchAngVelZ = -0.5f;
-
-    [Header("Cannon Settings")]
-    [SerializeField] GameObject bulletPrefab;
-    [SerializeField] float bulletLaunchForce = 20f;
-    [SerializeField] float destroyDelay = 5f;
-
     Rigidbody _rb;
     ShipControls _controls;
     Vector2 _movement;
@@ -84,25 +74,11 @@ public class ShipController : MonoBehaviour
 
     void LaunchBomb()
     {
-        if (GameManager.Instance.BombsLeft > 0)
-        {
-            Vector3 offset = new Vector3(1f, -1f, 0);
-            GameObject bomb = Instantiate(bombPrefab, transform.position + offset, Quaternion.Euler(0, -90, 0));
-            Rigidbody bombRb = bomb.GetComponent<Rigidbody>();
-            bombRb.AddForce(-transform.right * bombLaunchForce, ForceMode.Impulse);
-            bombRb.angularVelocity = new Vector3(0, 0, bombLaunchAngVelZ);
-
-            GameManager.Instance.DropBomb();
-        }
+        WeaponsManager.Instance.LaunchBomb(transform.position);
     }
 
     void FireCannon()
     {
-        Vector3 offset = new Vector3(2f, 0f, 0);
-        GameObject bullet = Instantiate(bulletPrefab, transform.position + offset, Quaternion.Euler(0, 0, 90));
-        //GameObject bullet = Instantiate(bulletPrefab, transform.position + offset, Quaternion.Euler(90, 180, 0));
-        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
-        bulletRb.AddForce(-transform.right * bulletLaunchForce, ForceMode.Impulse);
-        Destroy(bullet, destroyDelay);
+        WeaponsManager.Instance.FireCannon(transform.position);
     }
 }

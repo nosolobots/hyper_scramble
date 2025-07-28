@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 2735721571117174418, guid: 0a99e791d966e6cc1b8a1080a4787455, type: 3}
+  fXSoundType: 6
+  scoreType: 2
 --- !u!114 &4719351271239285148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,6 +67,7 @@ MonoBehaviour:
   launchForce: 10
   launchProb: 0.5
   checkDelay: 0.2
+  autoDestroy: 5
 --- !u!65 &2636135069370358471
 BoxCollider:
   m_ObjectHideFlags: 0

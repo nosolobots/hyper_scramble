@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 2735721571117174418, guid: e4d344335efd004c9b392333d68f419f, type: 3}
+  fXSoundType: 6
 --- !u!54 &8079302512440888316
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8946550379858160379, guid: 08e8c130966aa4d6bb2d7e151165fd0b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.863
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8946550379858160379, guid: 08e8c130966aa4d6bb2d7e151165fd0b, type: 3}
       propertyPath: m_LocalRotation.w

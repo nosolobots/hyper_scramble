@@ -58,11 +58,11 @@ MonoBehaviour:
   maxHSpeed: 15
   maxVSpeed: 10
   maxYPosition: 40
-  bombPrefab: {fileID: 0}
+  bombPrefab: {fileID: 2332017085272629197, guid: 7290fac3f0ca32a42a552e4f82072df3, type: 3}
   bombLaunchForce: 10
   bombLaunchAngVelZ: -0.5
-  bulletPrefab: {fileID: 0}
-  bulletLaunchForce: 20
+  bulletPrefab: {fileID: 1299106179522460452, guid: 818fe1325bc6418cfac0480bd5a4220a, type: 3}
+  bulletLaunchForce: 40
   destroyDelay: 5
 --- !u!114 &4825151232813710702
 MonoBehaviour:
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 2735721571117174418, guid: 7512a577f5d0cb30897149d082808586, type: 3}
+  fXSoundType: 3
 --- !u!33 &5585529420977031118
 MeshFilter:
   m_ObjectHideFlags: 0
