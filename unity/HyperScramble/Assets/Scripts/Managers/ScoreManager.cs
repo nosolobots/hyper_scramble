@@ -16,7 +16,7 @@ public enum ScoreType
 
 public class ScoreManager : Singleton<ScoreManager>
 {
-    [Header("Score UI")]
+    [Header("UI Elements")]
     [SerializeField] TextMeshProUGUI scoreText;
 
     [Header("Score Values")]
@@ -27,11 +27,13 @@ public class ScoreManager : Singleton<ScoreManager>
     [SerializeField] int ufoScore = 100;
     [SerializeField] int mysteryScoreBase = 100;
     [SerializeField] int baseScore = 800;   
+    [SerializeField] int extraLivesThreshold = 10000;
 
     int _score;
+    public int Score => _score;
     float _elapsedTime;
-
     Dictionary<ScoreType, int> _scoreTable;
+
     void Start()
     {
         CreateScoreTable();
@@ -86,17 +88,28 @@ public class ScoreManager : Singleton<ScoreManager>
             _score = 99999; // Cap the score at 99999
         }
 
-        UpdateScoreText();
+        // Check for extra lives
+        if (_score >= extraLivesThreshold)
+        {
+            GameManager.Instance.AddLife();
+        }
+
+        UpdateScoreUI();
     }
 
     public void ResetScore()
     {
         _score = 0;
-        UpdateScoreText();
+        _elapsedTime = 0f;
+
+        UpdateScoreUI();
     }
 
-    private void UpdateScoreText()
+    void UpdateScoreUI()
     {
-        scoreText.text = $"{_score.ToString("D5")}";
+        if (scoreText != null)
+        {
+            scoreText.text = _score.ToString("D5"); // Display score as 5 digits
+        }
     }
 }

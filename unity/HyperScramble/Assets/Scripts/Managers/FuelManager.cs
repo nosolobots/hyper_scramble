@@ -1,11 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FuelManager : Singleton<FuelManager>
 {
-
-    [Header("Fuel UI")]
+    [Header("UI Elements")]
     [SerializeField] Slider fuelSlider;
 
     [Header("Fuel Settings")]
@@ -14,13 +14,12 @@ public class FuelManager : Singleton<FuelManager>
     [SerializeField] float alarmThreshold = 0.4f; // 40% of max fuel
 
     float _fuel;
-    public float Fuel => _fuel;
 
     bool isOutOfFuel;
 
     void Start()
     {
-        Restart();
+        RestartFuel();
 
         StartCoroutine(FuelMonitorWarning());
     }
@@ -37,29 +36,36 @@ public class FuelManager : Singleton<FuelManager>
         }
 
         UseFuel(consumptionFactor * Time.deltaTime);
-        UpdateFuelSlider();
     }
 
-    private void UpdateFuelSlider()
-    {
-        fuelSlider.value = _fuel / maxFuel;
-    }
-
-    public void Restart()
+    public void RestartFuel()
     {
         _fuel = maxFuel;
+
+        isOutOfFuel = false;
+
+        UpdateFuelDisplay();
     }
 
     public void AddFuel(float fuel)
     {
         _fuel += fuel;
         if (_fuel > maxFuel) _fuel = maxFuel;
+
+        UpdateFuelDisplay();
     }
 
     public void UseFuel(float fuel)
     {
         _fuel -= fuel;
         if (_fuel < 0) _fuel = 0;
+
+        UpdateFuelDisplay();
+    }
+
+    void UpdateFuelDisplay()
+    {
+        fuelSlider.value = _fuel / maxFuel;
     }
 
     IEnumerator FuelMonitorWarning()

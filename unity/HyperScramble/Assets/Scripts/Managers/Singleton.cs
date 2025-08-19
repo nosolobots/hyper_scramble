@@ -16,6 +16,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
             _instance = (T)this;
         }
 
+        // Ensure the singleton persists across scene loads
         if (!gameObject.transform.parent)
         {
             DontDestroyOnLoad(gameObject);
