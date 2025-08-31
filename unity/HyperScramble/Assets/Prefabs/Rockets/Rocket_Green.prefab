@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2412f150fc499038b8ecdfcdf74aa4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 2735721571117174418, guid: f5aaeb242589d9792976cf1704d0f414, type: 3}
-  fXSoundType: 6
+  explosionPrefab: {fileID: 1803001447254273725, guid: 62506d3865daa385293f175e45238930, type: 3}
+  explosionSound: {fileID: 8300000, guid: 3c715a4867604e7bdaa27da1b43acd4d, type: 3}
   scoreType: 2
 --- !u!114 &394897364488881400
 MonoBehaviour:

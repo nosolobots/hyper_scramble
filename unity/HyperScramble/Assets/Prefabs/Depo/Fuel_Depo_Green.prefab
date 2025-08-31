@@ -620,8 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fef7bd606d5e2456a72eeb9e73faeeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 2735721571117174418, guid: 9a501d519030b07dca65d4151e38cdf8, type: 3}
-  fXSoundType: 4
+  explosionPrefab: {fileID: 1803001447254273725, guid: da168484b0e2b48fb814a5acc2ff9f4b, type: 3}
+  explosionSound: {fileID: 8300000, guid: 5eaf587e4dfbc0896911a6f8548afefa, type: 3}
   scoreType: 4
   fuelAmount: 10
 --- !u!1 &4907753774548859196

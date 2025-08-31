@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 2735721571117174418, guid: 7512a577f5d0cb30897149d082808586, type: 3}
-  fXSoundType: 3
+  explosionSound: {fileID: 8300000, guid: fae4b0c4baee85095843e4c6dfb99513, type: 3}
   scoreType: 0
 --- !u!33 &5585529420977031118
 MeshFilter:

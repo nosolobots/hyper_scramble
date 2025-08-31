@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2412f150fc499038b8ecdfcdf74aa4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 2735721571117174418, guid: 6580f91a4c4c7591e96c95c78d0a7842, type: 3}
-  fXSoundType: 5
+  explosionPrefab: {fileID: 1803001447254273725, guid: 15d675cdfa6de3dbda1d260d88caf3ae, type: 3}
+  explosionSound: {fileID: 8300000, guid: 5eaf587e4dfbc0896911a6f8548afefa, type: 3}
   scoreType: 6
 --- !u!135 &1842103128091208500
 SphereCollider:
