@@ -636,7 +636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &392879135
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1138,7 +1138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &697094585
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1324,6 +1324,63 @@ MonoBehaviour:
   levelMapsList:
   - {fileID: 5134402991101624365, guid: 813c312ee30a41a7a8c63e13e8828539, type: 3}
   nextLevelMap: 0
+--- !u!1001 &973024859
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1365543137063135896, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_Name
+      value: CrossFadeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
 --- !u!1 &1007485172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,10 +1431,9 @@ MonoBehaviour:
   startOffsetX: -30
   spawnOffsetX: -50
   shipPrefab: {fileID: 201062921668666914, guid: 7cd2820b633276431ac65835d1860777, type: 3}
-  shipUILives:
-  - {fileID: 392879134}
-  - {fileID: 697094584}
-  - {fileID: 2082366873}
+  livesAtStart: 3
+  shipUILivesContainer: {fileID: 97916290}
+  shipUILivesImage: {fileID: 21300000, guid: f6ab37701515904f49fd815ffeab1164, type: 3}
 --- !u!114 &1007485175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2464,7 +2520,8 @@ MonoBehaviour:
   ufoScore: 100
   mysteryScoreBase: 100
   baseScore: 800
-  extraLivesThreshold: 10000
+  extraLivesThreshold: 500
+  extraLifeSound: {fileID: 8300000, guid: 9a7ba2a40b09d187989d0597ef4f5aa4, type: 3}
 --- !u!1 &2082366873
 GameObject:
   m_ObjectHideFlags: 0
@@ -2482,7 +2539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2082366874
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2741,4 +2798,5 @@ SceneRoots:
   - {fileID: 560356298}
   - {fileID: 1456918118}
   - {fileID: 1430523479}
+  - {fileID: 973024859}
   - {fileID: 599627017}

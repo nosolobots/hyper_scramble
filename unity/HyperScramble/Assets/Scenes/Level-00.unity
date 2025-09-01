@@ -6889,9 +6889,9 @@ MonoBehaviour:
   m_text: 'move                               wasd/left stick
 
     fire laser                 
-    mouse 1/button a
+    mouse 1/button A
 
-    drop bombs              mouse 2/button b
+    drop bombs              mouse 2/button B
 
     sound on/off                            
     m/select
@@ -6975,6 +6975,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969694199}
   m_CullTransparentMesh: 1
+--- !u!4 &997717657 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+  m_PrefabInstance: {fileID: 7159358367114560144}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1000823791
 GameObject:
   m_ObjectHideFlags: 0
@@ -7385,6 +7390,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 997717657}
   - {fileID: 308205190}
   - {fileID: 1154137995}
   - {fileID: 1460414614}
@@ -21755,6 +21761,63 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &7159358367114560144
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1048690650}
+    m_Modifications:
+    - target: {fileID: 1365543137063135896, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_Name
+      value: CrossFadeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
 --- !u!1 &7159835884423338647
 GameObject:
   m_ObjectHideFlags: 0

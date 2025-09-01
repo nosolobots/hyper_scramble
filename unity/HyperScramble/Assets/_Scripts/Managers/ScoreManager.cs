@@ -27,12 +27,16 @@ public class ScoreManager : PersistentSingleton<ScoreManager>
     [SerializeField] int ufoScore = 100;
     [SerializeField] int mysteryScoreBase = 100;
     [SerializeField] int baseScore = 800;   
+
+    [Header("Extra Life Settings")]
     [SerializeField] int extraLivesThreshold = 10000;
+    [SerializeField] AudioClip extraLifeSound;
 
     int _score;
     public int Score => _score;
     float _elapsedTime;
     Dictionary<ScoreType, int> _scoreTable;
+    bool _extraLifeCollected;
 
     void Start()
     {
@@ -89,8 +93,12 @@ public class ScoreManager : PersistentSingleton<ScoreManager>
         }
 
         // Check for extra lives
-        if (_score >= extraLivesThreshold)
+        if (!_extraLifeCollected && _score >= extraLivesThreshold)
         {
+            _extraLifeCollected = true;
+
+            AudioSystem.Instance.PlayFXSound(extraLifeSound);
+
             GameManager.Instance.AddLife();
         }
 

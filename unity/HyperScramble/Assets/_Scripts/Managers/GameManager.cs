@@ -1,7 +1,9 @@
 using System.Collections;
 using Unity.Cinemachine;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
@@ -14,19 +16,30 @@ public class GameManager : PersistentSingleton<GameManager>
     [SerializeField] float spawnOffsetX = -40f;
     [SerializeField] GameObject shipPrefab;
 
-    [Header("Lives UI Settings")]
-    [SerializeField] GameObject[] shipUILives;
+    [Header("Lives Settings")]
+    //[SerializeField] GameObject[] shipUILives;
+    [SerializeField] int livesAtStart = 3;
+    [SerializeField] GameObject shipUILivesContainer;
+    [SerializeField] Sprite shipUILivesImage;
 
     CinemachineCamera _cinemachineCamera;
     GameObject _playerShip;
     int _currentLives;
-    int _maxLives;
+    //int _maxLives;
 
     protected override void Awake()
     {
         base.Awake();
     }
 
+    /*
+    void OnDisable()
+    {
+        Debug.Log("GameManager: OnDisable called, stopping all coroutines.");      
+        StopAllCoroutines();
+    }
+    */
+    
     void Start()
     {
         StartGame();
@@ -35,33 +48,37 @@ public class GameManager : PersistentSingleton<GameManager>
     void StartGame()
     {
         // Initialize game settings
-        _maxLives = shipUILives.Length;
-        _currentLives = _maxLives;
+        //_maxLives = shipUILives.Length;
+        //_currentLives = _maxLives;
+        _currentLives = livesAtStart;
 
         // Instantiate first level map
         //LevelMapManager.Instance.NextLeveLMap = 0;
         //LevelMapManager.Instance.LoadNextMap();
 
         // Initialize the scene
-        InitLevel();
+        _ = InitLevelAsync();
     }
 
-    void InitLevel()
+    async Task InitLevelAsync()
     {
-        Debug.Log($"Initializing level; lives: {_currentLives}  maxLives: {_maxLives}");
+        //Debug.Log($"Initializing level; lives: {_currentLives}  maxLives: {_maxLives}");
 
         // Show level start message
         int levelIndex = SceneManager.GetActiveScene().buildIndex;
         UIManager.Instance.DisplayMessage($"Level {levelIndex} Start!");
 
+        // Show the ship UI lives icons
+        ShowUILivesIcons();
+
         // Initialize ship
-        InitShip();
+        await InitShipAsync();
     }
 
-    void InitShip()
+    async Task InitShipAsync()
     {
         // Hide the last ship UI life icon
-        shipUILives[_currentLives - 1].SetActive(false);
+        //shipUILives[_currentLives - 1].SetActive(false);
 
         // Instatiate a new player ship
         _playerShip = SpawnShip();
@@ -75,15 +92,84 @@ public class GameManager : PersistentSingleton<GameManager>
         FuelManager.Instance.RestartFuel();
 
         // Start ship intro sequence
-        StartCoroutine(ShipIntro());
+        //StartCoroutine(ShipIntro());
+        await ShipIntro();
+
+        SetupCamera();
     }
 
+    async Task ShipIntro()
+    {
+        float time = 0f;
+        float transitionDuration = 2f;
+
+        //Debug.Log("Starting ship intro sequence.");
+
+        // Set the initial and final positions of the ship
+        Vector3 startPosition = _playerShip.transform.position;
+        Vector3 endPosition = new Vector3(
+            Camera.main.transform.position.x + startOffsetX,
+            Camera.main.transform.position.y,
+            0f
+        );
+
+        // Deactivate ship controls
+        _playerShip.GetComponent<ShipController>().enabled = false;
+
+        // Deactivate all ship colliders 
+        Collider[] colliders = _playerShip.GetComponentsInChildren<Collider>();
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = false;
+        }
+
+        // Wait for the ship to be fully initialized
+        while (time < transitionDuration)
+        {
+            time += Time.deltaTime;
+
+            if (_playerShip == null)
+            {
+                Debug.LogWarning("Player ship is null during intro sequence.");
+                continue;
+            }
+
+            _playerShip.transform.position = Vector3.Lerp(
+                startPosition,
+                endPosition,
+                time / transitionDuration
+            );
+
+            // Rotate ship over the transition duration
+            _playerShip.transform.rotation = Quaternion.Euler(
+                Mathf.Lerp(360f, 0f, time / transitionDuration),
+                180f,
+                0f
+            );
+
+            await Task.Yield();
+        }
+
+        // Finalize ship initialization
+        _playerShip.transform.position = endPosition;
+
+                // Activate ship controls
+        _playerShip.GetComponent<ShipController>().enabled = true;
+
+        // Reactivate ship colliders
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = true;
+        }
+    }
+
+    /*
     IEnumerator ShipIntro()
     {
         float time = 0f;
         float transitionDuration = 2f;
 
-        Debug.Log("Starting ship intro sequence.");
+        //Debug.Log("Starting ship intro sequence.");
 
         // Set the initial and final positions of the ship
         Vector3 startPosition = _playerShip.transform.position;
@@ -144,7 +230,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
         SetupCamera();
     }
-
+    */
     void SetupCamera()
     {
         // Set up the Cinemachine camera to follow the player ship
@@ -174,7 +260,7 @@ public class GameManager : PersistentSingleton<GameManager>
             Quaternion.Euler(0, 180f, 0)
         );
 
-        Debug.Log("Spawned player ship");
+        //Debug.Log("Spawned player ship");
 
         return obj;
     }
@@ -203,7 +289,9 @@ public class GameManager : PersistentSingleton<GameManager>
         // Wait for a short delay before reloading the scene
         yield return new WaitForSeconds(delayToRestartGame);
 
-        // Load the boot scene
+        // Fade out and reload the start scene
+        yield return FadeOutScene();
+    
         SceneManager.LoadScene(0);
     }
 
@@ -211,6 +299,9 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         // Wait for a short delay before reloading the scene
         yield return new WaitForSeconds(delayToReloadScene);
+
+        // Start fade out
+        yield return FadeOutScene();
 
         // Wait for the scene to finish loading
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex);
@@ -220,24 +311,40 @@ public class GameManager : PersistentSingleton<GameManager>
         }
 
         // Initialize the level
-        InitLevel();
+        _ = InitLevelAsync();
+    }
+
+    IEnumerator FadeOutScene()
+    {
+        CrossFadeScene fader = FindFirstObjectByType<CrossFadeScene>();
+        if (fader != null)
+        {
+            fader.FadeOut();
+            yield return new WaitForSeconds(CrossFadeScene.FADE_DURATION);
+        }
     }
 
     public void AddLife()
     {
+        /*
         if (_currentLives >= _maxLives)
         {
             return; // Cannot add more lives than the maximum
         }
+        */
 
         // Enable the next ship UI life icon
+        /*
         if (_currentLives < shipUILives.Length)
         {
             shipUILives[_currentLives].SetActive(true);
         }
+        */
 
         // Increment the current lives count
         _currentLives++;
+
+        ShowUILivesIcons();
     }
 
     public void CompleteLevel()
@@ -253,5 +360,31 @@ public class GameManager : PersistentSingleton<GameManager>
         }
 
         StartCoroutine(ReloadScene(nextSceneIndex));
+    }
+
+    void ShowUILivesIcons()
+    {
+        if (shipUILivesContainer == null || shipUILivesImage == null)
+        {
+            Debug.LogWarning("Ship UI lives container or image is not assigned.");
+            return;
+        }
+
+        // Clear existing icons
+        foreach (Transform child in shipUILivesContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Instantiate new icons based on current lives
+        for (int i = 0; i < _currentLives - 1; i++)
+        {
+            GameObject icon = new GameObject($"LifeIcon_{i + 1}");
+            icon.transform.SetParent(shipUILivesContainer.transform);
+            var image = icon.AddComponent<Image>();
+            image.sprite = shipUILivesImage;
+            // Ajustamos la posición de cada icono respecto al contenedor
+            icon.transform.localPosition = new Vector3(i * (-100) - 60, -40, 0); // Adjust spacing as needed
+        }
     }
 }

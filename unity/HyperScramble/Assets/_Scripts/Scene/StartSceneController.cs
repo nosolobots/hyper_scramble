@@ -51,7 +51,34 @@ public class StartSceneController : MonoBehaviour
     {
         if (GeneralOptionsController.Instance.IsGamePaused) return;
 
-        SceneManager.LoadScene(1);
+        StartCoroutine(TransitionToGameScene());
+    }
+
+    IEnumerator TransitionToGameScene()
+    {
+        // Fade out panels if any is active
+        foreach (var panel in panels)
+        {
+            if (panel.gameObject.activeSelf)
+            {
+                panel.FadeOut();
+            }
+        }
+
+        // Start fade to game scene
+        yield return FadeOutScene();
+
+        SceneManager.LoadScene(1); // Load the main game scene (index 1)
+    }
+
+    IEnumerator FadeOutScene()
+    {
+        CrossFadeScene fader = FindFirstObjectByType<CrossFadeScene>();
+        if (fader != null)
+        {
+            fader.FadeOut();
+            yield return new WaitForSeconds(CrossFadeScene.FADE_DURATION);
+        }
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

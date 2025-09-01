@@ -2060,6 +2060,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 697094584}
   m_CullTransparentMesh: 1
+--- !u!1001 &751547923
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1365543137063135896, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_Name
+      value: CrossFadeScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3516100185629734902, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 754f517cf6f1a091693f2493822ae33b, type: 3}
 --- !u!1 &758029919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2629,10 +2686,9 @@ MonoBehaviour:
   startOffsetX: -30
   spawnOffsetX: -50
   shipPrefab: {fileID: 201062921668666914, guid: 7cd2820b633276431ac65835d1860777, type: 3}
-  shipUILives:
-  - {fileID: 392879134}
-  - {fileID: 697094584}
-  - {fileID: 2082366873}
+  livesAtStart: 3
+  shipUILivesContainer: {fileID: 0}
+  shipUILivesImage: {fileID: 0}
 --- !u!114 &1007485175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5413,4 +5469,5 @@ SceneRoots:
   - {fileID: 560356298}
   - {fileID: 1456918118}
   - {fileID: 1430523479}
+  - {fileID: 751547923}
   - {fileID: 599627017}
