@@ -12,6 +12,9 @@ public class StartSceneController : MonoBehaviour
     [Header("Audio Settings")]
     [SerializeField] AudioClip backgroundMusic;
 
+    [Header("Testing Settings")]
+    [SerializeField] int firstSceneIndex = 1;
+
     Controls _controls;
     Coroutine _waitAndFadeCoroutine;
 
@@ -68,7 +71,7 @@ public class StartSceneController : MonoBehaviour
         // Start fade to game scene
         yield return FadeOutScene();
 
-        SceneManager.LoadScene(1); // Load the main game scene (index 1)
+        SceneManager.LoadScene(firstSceneIndex); // Load the main game scene (index 1)
     }
 
     IEnumerator FadeOutScene()

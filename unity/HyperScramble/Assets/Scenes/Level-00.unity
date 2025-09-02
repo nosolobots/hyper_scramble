@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 6b57d81fe5151694b8b37e979634d9e0, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 81f37f8c3322f03cc84bd663f8141d7d, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -9202,6 +9202,7 @@ MonoBehaviour:
   - 6
   delayBeforeFade: 0.2
   backgroundMusic: {fileID: 8300000, guid: 87b40b0395ef72b0f9b9ba6668aea55f, type: 3}
+  firstSceneIndex: 1
 --- !u!4 &1334801133
 Transform:
   m_ObjectHideFlags: 0
@@ -21262,7 +21263,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6705299137052063279}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7286f273365517ea7b4dcb8d8b61c0a9, type: 3}
   m_Name: 

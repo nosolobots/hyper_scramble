@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 6b57d81fe5151694b8b37e979634d9e0, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 81f37f8c3322f03cc84bd663f8141d7d, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2520,7 +2520,7 @@ MonoBehaviour:
   ufoScore: 100
   mysteryScoreBase: 100
   baseScore: 800
-  extraLivesThreshold: 500
+  extraLivesThreshold: 10000
   extraLifeSound: {fileID: 8300000, guid: 9a7ba2a40b09d187989d0597ef4f5aa4, type: 3}
 --- !u!1 &2082366873
 GameObject:

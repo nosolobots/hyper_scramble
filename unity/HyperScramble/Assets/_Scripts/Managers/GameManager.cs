@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using System.Threading;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
@@ -27,9 +28,26 @@ public class GameManager : PersistentSingleton<GameManager>
     int _currentLives;
     //int _maxLives;
 
+    bool _isLevelComplete = false;
+    public bool IsLevelComplete => _isLevelComplete;
+
+    CancellationTokenSource _cts;
+
     protected override void Awake()
     {
         base.Awake();
+    }
+
+    void OnEnable()
+    {
+        _cts = new CancellationTokenSource();
+    }
+
+    void OnDisable()
+    {
+        _cts?.Cancel();
+        _cts?.Dispose();
+        Debug.Log("GameManager: OnDisable called, cancelling tasks.");
     }
 
     /*
@@ -39,7 +57,7 @@ public class GameManager : PersistentSingleton<GameManager>
         StopAllCoroutines();
     }
     */
-    
+
     void Start()
     {
         StartGame();
@@ -57,12 +75,20 @@ public class GameManager : PersistentSingleton<GameManager>
         //LevelMapManager.Instance.LoadNextMap();
 
         // Initialize the scene
-        _ = InitLevelAsync();
+        try
+        {
+            _ = InitLevelAsync(_cts.Token);
+        }
+        catch (TaskCanceledException)
+        {
+            Debug.LogWarning("InitLevelAsync was canceled.");
+        }
     }
 
-    async Task InitLevelAsync()
+    async Task InitLevelAsync(CancellationToken token = default)
     {
         //Debug.Log($"Initializing level; lives: {_currentLives}  maxLives: {_maxLives}");
+        _isLevelComplete = false;
 
         // Show level start message
         int levelIndex = SceneManager.GetActiveScene().buildIndex;
@@ -72,10 +98,10 @@ public class GameManager : PersistentSingleton<GameManager>
         ShowUILivesIcons();
 
         // Initialize ship
-        await InitShipAsync();
+        await InitShipAsync(token);
     }
 
-    async Task InitShipAsync()
+    async Task InitShipAsync(CancellationToken token = default)
     {
         // Hide the last ship UI life icon
         //shipUILives[_currentLives - 1].SetActive(false);
@@ -93,12 +119,12 @@ public class GameManager : PersistentSingleton<GameManager>
 
         // Start ship intro sequence
         //StartCoroutine(ShipIntro());
-        await ShipIntro();
+        await ShipIntro(token);
 
         SetupCamera();
     }
 
-    async Task ShipIntro()
+    async Task ShipIntro(CancellationToken token = default)
     {
         float time = 0f;
         float transitionDuration = 2f;
@@ -349,6 +375,10 @@ public class GameManager : PersistentSingleton<GameManager>
 
     public void CompleteLevel()
     {
+        if (_isLevelComplete) return; // Prevent multiple completions
+
+        _isLevelComplete = true;
+        
         // Show level complete message
         UIManager.Instance.DisplayMessage("Level Complete!", 3f);
 
