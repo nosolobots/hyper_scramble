@@ -9202,7 +9202,7 @@ MonoBehaviour:
   - 6
   delayBeforeFade: 0.2
   backgroundMusic: {fileID: 8300000, guid: 87b40b0395ef72b0f9b9ba6668aea55f, type: 3}
-  firstSceneIndex: 1
+  firstSceneIndex: 5
 --- !u!4 &1334801133
 Transform:
   m_ObjectHideFlags: 0
