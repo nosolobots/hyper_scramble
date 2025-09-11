@@ -8,7 +8,6 @@ public class BaseAlarm : MonoBehaviour
     {
         if (other.CompareTag("Ship"))
         {
-            Debug.Log("Alarm Triggered!");
             AudioSystem.Instance.PlayFXSound(alarmSound);
         }
     }

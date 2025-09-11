@@ -8,6 +8,10 @@ using System.Threading;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
+    [Header("Testing Options")]
+    [SerializeField] bool godMode = false;
+    public bool GodMode => godMode;
+
     [Header("Game Settings")]
     [SerializeField] float delayToReloadScene = 2f;
     [SerializeField] float delayToRestartGame = 5f;
@@ -47,7 +51,7 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         _cts?.Cancel();
         _cts?.Dispose();
-        Debug.Log("GameManager: OnDisable called, cancelling tasks.");
+        //Debug.Log("GameManager: OnDisable called, cancelling tasks.");
     }
 
     /*
@@ -69,6 +73,8 @@ public class GameManager : PersistentSingleton<GameManager>
         //_maxLives = shipUILives.Length;
         //_currentLives = _maxLives;
         _currentLives = livesAtStart;
+
+        Debug.Log($"Game started with {_currentLives} lives.");
 
         // Instantiate first level map
         //LevelMapManager.Instance.NextLeveLMap = 0;
@@ -179,7 +185,7 @@ public class GameManager : PersistentSingleton<GameManager>
         // Finalize ship initialization
         _playerShip.transform.position = endPosition;
 
-                // Activate ship controls
+        // Activate ship controls
         _playerShip.GetComponent<ShipController>().enabled = true;
 
         // Reactivate ship colliders
@@ -294,6 +300,9 @@ public class GameManager : PersistentSingleton<GameManager>
     public void LoseLife()
     {
         _currentLives--;
+
+        Debug.Log($"Life lost. Current lives: {_currentLives}");
+
         if (_currentLives <= 0)
         {
             StartCoroutine(RestartGame());
@@ -369,6 +378,8 @@ public class GameManager : PersistentSingleton<GameManager>
 
         // Increment the current lives count
         _currentLives++;
+
+        Debug.Log($"Life added. Current lives: {_currentLives}");
 
         ShowUILivesIcons();
     }

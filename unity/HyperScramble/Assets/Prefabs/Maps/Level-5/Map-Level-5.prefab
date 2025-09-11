@@ -3226,7 +3226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05bc4dacff354575581d884888a1675f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alarmSound: {fileID: 8300000, guid: 00e7b428c96100d689cfeef712345f72, type: 3}
+  alarmSound: {fileID: 8300000, guid: 71d4dc9f99b354ebb888b7cb7323d6f9, type: 3}
 --- !u!1 &570478811288120348
 GameObject:
   m_ObjectHideFlags: 0
