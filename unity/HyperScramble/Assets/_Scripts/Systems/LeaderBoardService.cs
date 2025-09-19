@@ -23,6 +23,22 @@ public class LeaderBoardService : PersistentSingleton<LeaderBoardService>
 {
     [SerializeField] string databaseURL = "https://hyperscramble-leaderboard-default-rtdb.europe-west1.firebasedatabase.app/scores.json";
 
+    List<ScoreEntry> _topScores = new List<ScoreEntry>();
+    public IReadOnlyList<ScoreEntry> TopScores => _topScores;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        StartCoroutine(GetTopScores(8, (scores) =>
+        {
+            _topScores = scores;
+
+            // Ordenamos la lista de puntuaciones de forma descendente
+            _topScores.Sort((a, b) => b.score.CompareTo(a.score));
+        }));
+    }
+
     // Obtiene las N mejores puntuaciones y devuelve lista ordenada desc
     public IEnumerator GetTopScores(int limit, Action<List<ScoreEntry>> onResult)
     {

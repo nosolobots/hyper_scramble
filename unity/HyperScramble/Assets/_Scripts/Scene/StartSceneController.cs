@@ -7,7 +7,7 @@ public class StartSceneController : MonoBehaviour
     [Header("Panels Settings")]
     [SerializeField] CanvasFader[] panels;
     [SerializeField] float[] panelDurations;
-    [SerializeField] float delayBeforeFade = 2f;
+    [SerializeField] float delayBeforeFade;
 
     [Header("Audio Settings")]
     [SerializeField] AudioClip backgroundMusic;
