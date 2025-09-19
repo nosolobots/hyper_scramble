@@ -78,10 +78,11 @@ public class FirebaseLeaderboard : MonoBehaviour
         {
             //StartCoroutine(GetTopScores(10, ShowScores));
             //StartCoroutine(GetTopScores(10, CheckScores));
+            StartCoroutine(LeaderBoardService.Instance.GetTopScores(10, ShowScores));
         }
     }
 
-    void ShowScores(List<PlayerScore> scores)
+    void ShowScores(List<ScoreEntry> scores)
     {
         Debug.Log("=== Leaderboard ===");
         for (int i = 0; i < scores.Count; i++)
