@@ -29,7 +29,6 @@ public class StartSceneController : MonoBehaviour
 
     void OnEnable()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
         _controls.Enable();
 
         if (_waitAndFadeCoroutine == null)
@@ -40,7 +39,6 @@ public class StartSceneController : MonoBehaviour
 
     void OnDisable()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
         _controls.Disable();
 
         if (_waitAndFadeCoroutine != null)
@@ -84,17 +82,7 @@ public class StartSceneController : MonoBehaviour
         }
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        var persistents = GameObject.FindGameObjectsWithTag("ReloadOnStart");
-        foreach (var obj in persistents)
-        {
-            if (obj.scene.name == null || obj.scene.name == "DontDestroyOnLoad")
-            {
-                Destroy(obj);
-            }
-        }
-    }
+
 
     void Start()
     {

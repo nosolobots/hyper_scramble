@@ -23,6 +23,9 @@ public class LeaderBoardService : PersistentSingleton<LeaderBoardService>
 {
     [SerializeField] string databaseURL = "https://hyperscramble-leaderboard-default-rtdb.europe-west1.firebasedatabase.app/scores.json";
 
+    [SerializeField] int maxEntries = 8;
+    public int MaxEntries => maxEntries;
+
     List<ScoreEntry> _topScores = new List<ScoreEntry>();
     public IReadOnlyList<ScoreEntry> TopScores => _topScores;
 
@@ -30,7 +33,13 @@ public class LeaderBoardService : PersistentSingleton<LeaderBoardService>
     {
         base.Awake();
 
-        StartCoroutine(GetTopScores(8, (scores) =>
+        // Cargar las mejores puntuaciones al iniciar
+        RefreshTopScores();
+    }
+
+    public void RefreshTopScores()
+    {
+        StartCoroutine(GetTopScores(MaxEntries, (scores) =>
         {
             _topScores = scores;
 

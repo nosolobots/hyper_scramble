@@ -1,5 +1,7 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class CallSignInput : MonoBehaviour
 {
@@ -120,7 +122,21 @@ public class CallSignInput : MonoBehaviour
     void ConfirmInitials()
     {
         string callSign = new string(_initials);
-        Debug.Log($"Call Sign Confirmed: {callSign}");
+
         // Implement further logic for confirmed call sign
+        LeaderBoardService.Instance.PostScore(
+            new ScoreEntry(callSign, ScoreManager.Instance.Score, 0), (success) =>
+        {
+            if (success)
+            {
+                Debug.Log("Score posted successfully.");
+            }
+            else
+            {
+                Debug.Log("Failed to post score.");
+            }
+
+            SceneManager.LoadScene(0); // Volvemos al menú principal
+        });
     }
 }

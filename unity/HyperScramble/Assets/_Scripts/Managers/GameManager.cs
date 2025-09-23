@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Linq;
 
 public class GameManager : PersistentSingleton<GameManager>
 {
@@ -326,7 +327,15 @@ public class GameManager : PersistentSingleton<GameManager>
 
         // Fade out and reload the start scene
         yield return FadeOutScene();
-    
+
+        // Chequeamos si la puntuación es suficiente para entrar en el ranking
+        if (ScoreManager.Instance.Score > LeaderBoardService.Instance.TopScores.Last<ScoreEntry>().score ||
+            LeaderBoardService.Instance.TopScores.Count < LeaderBoardService.Instance.MaxEntries)
+        {
+            SceneManager.LoadScene(6); // Scene 6 is the Enter High Score scene
+            yield break;
+        }
+
         SceneManager.LoadScene(0);
     }
 
