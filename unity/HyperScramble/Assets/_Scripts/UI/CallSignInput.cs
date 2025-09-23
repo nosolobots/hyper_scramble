@@ -4,12 +4,15 @@ using UnityEngine;
 public class CallSignInput : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI[] letterSlots;
+    [SerializeField] AudioClip paradeSong;
+    [SerializeField] AudioClip indexChangeFX;
+    [SerializeField] AudioClip charChangeFX;
 
     Controls _controls;
     Vector2 _navigation;
-    char[] _initials = { 'A', 'A', 'A', 'A', 'A' };
+    char[] _initials = { '_', '_', '_', '_', '_' };
     int _currentIndex = 0;
-    const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+    const string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*_";
 
     void Awake()
     {
@@ -32,6 +35,11 @@ public class CallSignInput : MonoBehaviour
     void Start()
     {
         UpdateLetterSlots();
+
+        if (paradeSong != null)
+        {
+            AudioSystem.Instance.PlayMusic(paradeSong);
+        }
     }
 
     void UpdateLetterSlots()
@@ -88,13 +96,25 @@ public class CallSignInput : MonoBehaviour
         int currentLetterIndex = _alphabet.IndexOf(_initials[_currentIndex]);
         currentLetterIndex = (currentLetterIndex + direction + _alphabet.Length) % _alphabet.Length;
         _initials[_currentIndex] = _alphabet[currentLetterIndex];
+
         UpdateLetterSlots();
+
+        if (charChangeFX != null)
+        {
+            AudioSystem.Instance.PlayFXSound(charChangeFX);
+        }
     }
 
     void ChangeIndex(int direction)
     {
         _currentIndex = (_currentIndex + direction + letterSlots.Length) % letterSlots.Length;
+
         UpdateLetterSlots();
+
+        if (indexChangeFX != null)
+        {
+            AudioSystem.Instance.PlayFXSound(indexChangeFX);
+        }
     }
 
     void ConfirmInitials()
