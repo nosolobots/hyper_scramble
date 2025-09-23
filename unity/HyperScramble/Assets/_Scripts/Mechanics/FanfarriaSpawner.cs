@@ -21,7 +21,8 @@ public class FanfarriaSpawner : MonoBehaviour
             float randomX = Random.Range(minX, maxX);
             float randomY = Random.Range(minY, maxY);
             Vector3 spawnPosition = new Vector3(randomX, randomY, 0f);
-
+            Vector3 parentPosition = transform.position;
+            spawnPosition += parentPosition;
             ParticleSystem fanfarria = Instantiate(fanfarriaParticles, spawnPosition, Quaternion.identity);
             fanfarria.Play();
 
