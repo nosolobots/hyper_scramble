@@ -76,8 +76,6 @@ public class FirebaseLeaderboard : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //StartCoroutine(GetTopScores(10, ShowScores));
-            //StartCoroutine(GetTopScores(10, CheckScores));
             StartCoroutine(LeaderBoardService.Instance.GetTopScores(10, ShowScores));
         }
     }

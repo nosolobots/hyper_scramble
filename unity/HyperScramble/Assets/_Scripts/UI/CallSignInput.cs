@@ -122,21 +122,22 @@ public class CallSignInput : MonoBehaviour
     void ConfirmInitials()
     {
         string callSign = new string(_initials);
+        int score = ScoreManager.Instance.Score;
 
-        // Implement further logic for confirmed call sign
-        LeaderBoardService.Instance.PostScore(
-            new ScoreEntry(callSign, ScoreManager.Instance.Score, 0), (success) =>
+        Debug.Log($"Call sign confirmed: {callSign} with score {score}");
+        StartCoroutine(LeaderBoardService.Instance.PostScore(new ScoreEntry(callSign, score, 0), (success) =>
         {
             if (success)
             {
                 Debug.Log("Score posted successfully.");
+                LeaderBoardService.Instance.RefreshTopScores();
             }
             else
             {
-                Debug.Log("Failed to post score.");
+                Debug.LogError("Failed to post score.");
             }
 
             SceneManager.LoadScene(0); // Volvemos al menú principal
-        });
+        }));
     }
 }

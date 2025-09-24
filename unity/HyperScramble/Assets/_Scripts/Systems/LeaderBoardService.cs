@@ -114,6 +114,8 @@ public class LeaderBoardService : PersistentSingleton<LeaderBoardService>
             { "hits", newScore.hits }
         });
 
+        Debug.Log($"Enviando puntuación: {json}");
+
         // Convertimos el JSON a un array de bytes
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(json);
 
@@ -124,7 +126,12 @@ public class LeaderBoardService : PersistentSingleton<LeaderBoardService>
             www.downloadHandler = new DownloadHandlerBuffer();
             www.SetRequestHeader("Content-Type", "application/json");
 
+            // Enviamos la solicitud y esperamos la respuesta
+            Debug.Log("Enviando solicitud...");
+
             yield return www.SendWebRequest();
+
+            Debug.Log("Solicitud enviada. Chequeando resultado...");
 
             if (www.result == UnityWebRequest.Result.Success)
             {
