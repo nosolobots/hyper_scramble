@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class LoadTopScores : MonoBehaviour
 {
-    [SerializeField] int numberOfScores = 8;
     [SerializeField] TextMeshProUGUI nicksText;
     [SerializeField] TextMeshProUGUI scoresText;
 
