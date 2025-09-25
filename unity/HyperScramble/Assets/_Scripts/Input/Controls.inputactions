@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "Controls",
     "maps": [
         {
@@ -45,6 +46,15 @@
                     "name": "Pause",
                     "type": "Button",
                     "id": "a4aa17f5-da52-4097-871e-02a43a95345a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Exit",
+                    "type": "Button",
+                    "id": "835f9301-b8ea-48f7-b5b7-6d7680dfa092",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -203,6 +213,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b4b038a3-79f9-49ba-a780-e9665de4b656",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Exit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

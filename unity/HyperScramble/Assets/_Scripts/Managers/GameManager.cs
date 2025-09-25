@@ -333,10 +333,11 @@ public class GameManager : PersistentSingleton<GameManager>
             LeaderBoardService.Instance.TopScores.Count < LeaderBoardService.Instance.MaxEntries)
         {
             SceneManager.LoadScene(6); // Scene 6 is the Enter High Score scene
-            yield break;
         }
-
-        SceneManager.LoadScene(0);
+        else
+        {
+            SceneManager.LoadScene(0); // Scene 0 is the Main Menu scene
+        }
     }
 
     IEnumerator ReloadScene(int sceneIndex, bool restart = false)
@@ -404,7 +405,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
-        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings - 1)
         {
             nextSceneIndex = 1; // Loop back to the first level if there are no more levels
         }
@@ -435,6 +436,12 @@ public class GameManager : PersistentSingleton<GameManager>
             image.sprite = shipUILivesImage;
             // Ajustamos la posición de cada icono respecto al contenedor
             icon.transform.localPosition = new Vector3(i * (-100) - 60, -40, 0); // Adjust spacing as needed
+
+            // Ajustamos el tamaño del icono en función de la resolución
+            // Obtenemos la resolución actual
+            int screenWidth = Screen.width;
+            float scaleFactor = screenWidth / 1920f; // Asumimos 1920 como el ancho base para el escalado
+            icon.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
         }
     }
 }

@@ -13,6 +13,7 @@ public class GeneralOptionsController : PersistentSingleton<GeneralOptionsContro
         _controls = new Controls();
         _controls.Player.Sound.performed += _ => ToggleSound();
         _controls.Player.Pause.performed += _ => TogglePause();
+        _controls.Player.Exit.performed += _ => Quit();
 
         _controls.Enable();
     }
@@ -54,7 +55,12 @@ public class GeneralOptionsController : PersistentSingleton<GeneralOptionsContro
 
         // Si hay una nave, bloquea los controles
         ShipController ship = GameObject.FindFirstObjectByType<ShipController>();
-        ship.enabled = false;
+
+        // Chequeamos si hay nave, porque en el menú principal no la hay
+        if (ship != null)
+        {
+            ship.enabled = false;
+        }
 
         _isGamePaused = true;
     }
@@ -63,14 +69,24 @@ public class GeneralOptionsController : PersistentSingleton<GeneralOptionsContro
     {
         // Reanuda la reproducción de la música
         AudioSystem.Instance.ResumeMusic();
-        
+
         // Reanuda el juego
         Time.timeScale = 1f;
 
         // Si hay una nave, desbloquea los controles
         ShipController ship = GameObject.FindFirstObjectByType<ShipController>();
-        ship.enabled = true;        
-        
+
+        // Chequeamos si hay nave, porque en el menú principal no la hay
+        if (ship != null)
+        {
+            ship.enabled = true;
+        }
+
         _isGamePaused = false;
+    }
+    
+    void Quit()
+    {
+        Application.Quit();
     }
 }
